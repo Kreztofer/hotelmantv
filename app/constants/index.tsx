@@ -12,6 +12,10 @@ import chelsea from "@/public/images/chelsea.png";
 import tcl from "@/public/images/tcl.png";
 import sony from "@/public/images/sony.png";
 import philips from "@/public/images/philips.png";
+import report from "@/public/images/report.png";
+import support from "@/public/images/support.png";
+import meal from "@/public/images/meal.png";
+import menu from "@/public/images/menu.png";
 import { BsHouseFill, BsFillBarChartLineFill } from "react-icons/bs";
 import { FaGear } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
@@ -33,6 +37,8 @@ export const images = {
   threejs,
   chelsea,
 };
+
+export const carousel = [menu, meal, report, support];
 
 export const partners = [
   {

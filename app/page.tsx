@@ -1,4 +1,5 @@
 import Calltoaction from "./components/Calltoaction";
+import Demo from "./components/Demo";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Features />
+      <Demo />
       <Hotelsandguests />
       <Partners />
       <Calltoaction />
