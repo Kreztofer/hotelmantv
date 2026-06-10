@@ -29,21 +29,24 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Overview
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Features
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Pricing
@@ -56,21 +59,24 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   For Hotels
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   For Guests
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Use Cases
@@ -83,21 +89,24 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Blog
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Help Center
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Case Studies
@@ -111,21 +120,24 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   About Us
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Careers
                 </a>
 
                 <a
-                  href="#"
+                  href="/hotelmantv.apk"
+                  download="hotelmantv.apk"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Contact
