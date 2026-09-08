@@ -1,3 +1,4 @@
+"use client";
 import { IoIosArrowDropright } from "react-icons/io";
 
 import Container from "./Container";
@@ -6,6 +7,14 @@ import Image from "next/image";
 import Button from "./Button";
 
 const Hero = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const link = document.createElement("a");
+    link.href = "/hotelmantv.apk";
+    link.download = "hotelmantv.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <Container>
       <div className="flex mt-24 w-full items-center  justify-between">
@@ -19,8 +28,17 @@ const Hero = () => {
             hotel offers.
           </p>
           <div className="flex gap-6">
-            <Button>Get Started</Button>
-            <Button variant="outline">
+            <Button onClick={handleClick}>Get Started</Button>
+            <Button
+              onClick={() => {
+                window.open(
+                  "https://digiwarelimited.com/Hotelman",
+                  "_blank",
+                  "noopener,noreferrer",
+                );
+              }}
+              variant="outline"
+            >
               <div className="flex items-center">
                 <IoIosArrowDropright
                   size={18}

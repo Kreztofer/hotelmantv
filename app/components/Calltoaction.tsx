@@ -1,9 +1,18 @@
+"use client";
 import Image from "next/image";
 import Container from "./Container";
 import { images } from "../constants";
 import Button from "./Button";
 
 const Calltoaction = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const link = document.createElement("a");
+    link.href = "/hotelmantv.apk";
+    link.download = "hotelmantv.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <Container>
       <div className="mt-10 justify-between h-30 px-4 border border-[#212B30] items-center flex rounded-[20px]  bg-linear-to-r from-[#0D1523] via-[#0D1523] via-60% to-[#1C5970]">
@@ -22,8 +31,19 @@ const Calltoaction = () => {
           </div>
         </div>
         <div className="flex gap-4 mr-2">
-          <Button>Get Started</Button>
-          <Button variant="outline">Contact Sales</Button>
+          <Button onClick={handleClick}>Get Started</Button>
+          <Button
+            onClick={() => {
+              window.open(
+                "https://digiwarelimited.com",
+                "_blank",
+                "noopener,noreferrer",
+              );
+            }}
+            variant="outline"
+          >
+            Contact Sales
+          </Button>
         </div>
       </div>
     </Container>

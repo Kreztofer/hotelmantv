@@ -1,9 +1,18 @@
+"use client";
 import { GoArrowUpRight } from "react-icons/go";
 import Container from "./Container";
 import Button from "./Button";
 import HotelCarousel from "./HotelCarousel";
 
 const Demo = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const link = document.createElement("a");
+    link.href = "/hotelmantv.apk";
+    link.download = "hotelmantv.apk";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <Container>
       <div className="mt-10 py-10 border rounded-[20px] border-[#1A1F24] px-8 flex flex-row justify-between">
@@ -18,7 +27,7 @@ const Demo = () => {
             effortless
           </p>
           <div className="mt-4">
-            <Button>
+            <Button onClick={handleClick}>
               <div className="flex  gap-2 items-center">
                 Get Now
                 <GoArrowUpRight size={18} className=" animate-pulse" />

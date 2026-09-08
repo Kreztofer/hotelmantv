@@ -9,7 +9,7 @@ import Partners from "./components/Partners";
 
 export default function Home() {
   return (
-    <div>
+    <div className="text-white">
       <Navbar />
       <Hero />
       <Features />

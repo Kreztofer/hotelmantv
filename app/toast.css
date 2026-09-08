@@ -1,0 +1,12 @@
+.Toastify__toast--success {
+  background: #38adec !important;
+  color: #fff !important;
+}
+
+.Toastify__progress-bar--success {
+  background: #fff !important;
+}
+
+.Toastify__toast-icon svg {
+  fill: #fff !important;
+}
