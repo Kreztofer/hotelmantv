@@ -162,7 +162,7 @@ const Events = () => {
         {/* Status */}
         <div className="mt-4 flex items-center justify-end gap-4 text-[12px]">
           <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">
-            Draft
+            Events
           </p>
 
           <p className="text-gray-600"> Last saved: {lastSaved ?? 'Never'}</p>

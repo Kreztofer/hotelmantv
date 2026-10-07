@@ -1,20 +1,21 @@
-"use client";
-import { IoIosArrowDropright } from "react-icons/io";
-
-import Container from "./Container";
-import { heroIcons, images } from "../constants";
-import Image from "next/image";
-import Button from "./Button";
+'use client';
+import { IoIosArrowDropright } from 'react-icons/io';
+import { useRouter } from 'next/navigation';
+import Container from './Container';
+import { heroIcons, images } from '../constants';
+import Image from 'next/image';
+import Button from './Button';
 
 const Hero = () => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const link = document.createElement("a");
-    link.href = "/hotelmantv.apk";
-    link.download = "hotelmantv.apk";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const router = useRouter();
+  // const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   const link = document.createElement('a');
+  //   link.href = '/hotelmantv.apk';
+  //   link.download = 'hotelmantv.apk';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
   return (
     <Container>
       <div className="flex mt-24 w-full items-center  justify-between">
@@ -28,13 +29,13 @@ const Hero = () => {
             hotel offers.
           </p>
           <div className="flex gap-6">
-            <Button onClick={handleClick}>Get Started</Button>
+            <Button onClick={() => router.push('/signin')}>Get Started</Button>
             <Button
               onClick={() => {
                 window.open(
-                  "https://digiwarelimited.com/Hotelman",
-                  "_blank",
-                  "noopener,noreferrer",
+                  'https://digiwarelimited.com/Hotelman',
+                  '_blank',
+                  'noopener,noreferrer',
                 );
               }}
               variant="outline"

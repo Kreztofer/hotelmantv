@@ -25,28 +25,31 @@ const Footer = () => {
 
           <div className="flex gap-28">
             <div>
-              <h3 className="font-semibold  mb-5">Product</h3>
+              <h3 className="font-semibold mb-5">Product</h3>
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Overview
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Features
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Pricing
@@ -55,28 +58,31 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-white font-semibold ] mb-5">Solutions</h3>
+              <h3 className="text-white font-semibold mb-5">Solutions</h3>
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   For Hotels
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   For Guests
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Use Cases
@@ -89,24 +95,27 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Blog
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Help Center
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Case Studies
@@ -120,24 +129,27 @@ const Footer = () => {
 
               <div className="flex flex-col gap-3">
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   About Us
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Careers
                 </a>
 
                 <a
-                  href="/hotelmantv.apk"
-                  download="hotelmantv.apk"
+                  href="https://digiwarelimited.com/Hotelman"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Contact

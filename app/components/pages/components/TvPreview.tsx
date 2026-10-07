@@ -132,9 +132,7 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
                 alt="divider"
               />
               <div className="max-w-2xl mt-2 text-center">
-                {tvData.guestInfo.includes('guest') && (
-                  <p className=" text-white text-[15px] ">Welcome, Maria!</p>
-                )}
+                <p className=" text-white text-[15px] ">Welcome, Maria!</p>
               </div>
               <div className="max-w-2xl text-center">
                 {tvData.message && (
@@ -145,24 +143,14 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
               </div>
 
               <div className="flex flex-wrap mt-1 justify-center gap-2">
-                {tvData.guestInfo.includes('room') && (
-                  <GuestChip
-                    icon={<BsDoorOpenFill size={16} />}
-                    label="Room 512"
-                  />
-                )}
+                <GuestChip
+                  icon={<BsDoorOpenFill size={16} />}
+                  label="Room 512"
+                />
 
-                {tvData.guestInfo.includes('room') &&
-                  tvData.guestInfo.includes('stay') && (
-                    <div className="h-8 w-0.5 rounded-full bg-white/60" />
-                  )}
+                <div className="h-8 w-0.5 rounded-full bg-white/60" />
 
-                {tvData.guestInfo.includes('stay') && (
-                  <GuestChip
-                    icon={<CalendarDays size={16} />}
-                    label="3 Nights"
-                  />
-                )}
+                <GuestChip icon={<CalendarDays size={16} />} label="3 Nights" />
               </div>
             </div>
 

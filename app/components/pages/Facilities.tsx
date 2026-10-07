@@ -40,9 +40,7 @@ const Facilities = () => {
     null,
   );
 
- 
   const hasLoadedStorage = useRef(false);
-
 
   useEffect(() => {
     const initializeFromStorage = () => {
@@ -75,7 +73,6 @@ const Facilities = () => {
     };
   }, []);
 
-
   useEffect(() => {
     if (!hasLoadedStorage.current) {
       return;
@@ -89,7 +86,6 @@ const Facilities = () => {
       }),
     );
   }, [facilities, lastSaved]);
-
 
   const effectiveSelectedFacilityId =
     selectedFacilityId ?? facilities[0]?.id ?? null;
@@ -172,7 +168,7 @@ const Facilities = () => {
         {/* Status */}
         <div className="mt-4 flex items-center justify-end gap-4 text-[12px]">
           <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">
-            Draft
+            Facility
           </p>
 
           <p className="text-gray-600">Last saved: {lastSaved ?? 'Never'}</p>

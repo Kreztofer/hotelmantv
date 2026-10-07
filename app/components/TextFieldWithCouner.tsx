@@ -6,6 +6,7 @@ interface TextFieldWithCounterProps {
   label: string;
   value: string;
   type?: string;
+  rows?: number;
   required?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   maxLength: number;
@@ -17,6 +18,7 @@ export default function TextFieldWithCounter({
   label,
   value,
   onChange,
+  rows = 3,
   maxLength,
   type="string",
   required = false,
@@ -42,7 +44,7 @@ export default function TextFieldWithCounter({
           value={value}
           onChange={onChange}
           maxLength={maxLength}
-          rows={3}
+          rows={rows}
           placeholder={placeholder}
           className="w-full rounded-lg text-[14px] border border-gray-200 p-3 outline-none focus:border-primary"
         />

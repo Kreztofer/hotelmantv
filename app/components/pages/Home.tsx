@@ -13,7 +13,6 @@ const initialTvData = {
   message: 'We wish you a pleasant and memorable stay',
   images: [] as ImageItem[],
   currentImage: 0,
-  guestInfo: ['room', 'guest', 'stay'],
 };
 
 const Home = () => {
@@ -73,7 +72,7 @@ const Home = () => {
 
     setLastSaved(formattedTime);
 
-    toast.success('Draft saved successfully!');
+    toast.success('Home page saved successfully!');
   };
 
   return (
@@ -89,21 +88,15 @@ const Home = () => {
         </div>
 
         <div>
-          <Button
-            onClick={handleSaveDraft}
-            className="mr-4"
-            variant="outlineBlue"
-          >
-            Save Draft
+          <Button onClick={handleSaveDraft} variant="blue">
+            Save Changes
           </Button>
-
-          <Button variant="blue">Publish Changes</Button>
         </div>
       </div>
 
       {/* Status */}
       <div className="mt-4 flex w-full items-center justify-end gap-4 text-[12px]">
-        <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">Draft</p>
+        <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">Home</p>
 
         <p className="text-gray-600">Last saved: {lastSaved ?? 'Never'}</p>
       </div>

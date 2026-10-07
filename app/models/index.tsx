@@ -7,7 +7,6 @@ export interface TVData {
   message: string;
   images: ImageItem[];
   currentImage: number;
-  guestInfo: string[];
 }
 
 export interface availability {

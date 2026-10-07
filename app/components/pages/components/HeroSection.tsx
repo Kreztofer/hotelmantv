@@ -2,23 +2,23 @@ import React from 'react';
 import { TVData } from '@/app/models';
 import HeroImageUploader from '../../HeroImageUploader';
 import TextFieldWithCounter from '../../TextFieldWithCouner';
-import { guestInfo } from '@/app/constants';
+// import { guestInfo } from '@/app/constants';
 
 interface HeroSectionProps {
   tvData: TVData;
   setTvData: React.Dispatch<React.SetStateAction<TVData>>;
 }
 const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
-  const toggleGuestInfo = (id: string) => {
-    setTvData((prev) => ({
-      ...prev,
-      guestInfo: prev.guestInfo.includes(id)
-        ? prev.guestInfo.filter((item) => item !== id)
-        : [...prev.guestInfo, id],
-    }));
-  };
+  // const toggleGuestInfo = (id: string) => {
+  //   setTvData((prev) => ({
+  //     ...prev,
+  //     guestInfo: prev.guestInfo.includes(id)
+  //       ? prev.guestInfo.filter((item) => item !== id)
+  //       : [...prev.guestInfo, id],
+  //   }));
+  // };
   return (
-    <div className="border flex flex-col gap-3 border-gray-200 shadow-lg p-4 rounded-md w-[47%]">
+    <div className="border flex flex-col gap-4 border-gray-200 shadow-lg p-4 rounded-md w-[47%]">
       <div>
         <p className="font-bold">Hero Section</p>
         <p className="text-[14px] text-gray-500">
@@ -50,9 +50,10 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
           }))
         }
         multiline
+        rows={10}
         maxLength={50}
       />
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         <div>
           <h3 className="font-bold text-[14px]">Guest Information</h3>
 
@@ -91,7 +92,7 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

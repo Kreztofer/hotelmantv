@@ -193,7 +193,7 @@ const Directory = () => {
         {/* Status */}
         <div className="mt-4 flex items-center justify-end gap-4 text-[12px]">
           <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">
-            Draft
+            Directory
           </p>
 
           <p className="text-gray-600">Last saved: {lastSaved ?? 'Never'}</p>
@@ -231,8 +231,8 @@ const Directory = () => {
       <Modal
         isOpen={showModal}
         onClose={handleCancel}
-        title="Add New Facility"
-        subtitle="Add a new facility that will be shown on the TV app."
+        title="Add New Directory"
+        subtitle="Add a new directory that will be shown on the TV app."
       >
         <DirectoriesForm
           directoriesData={directoriesData}
