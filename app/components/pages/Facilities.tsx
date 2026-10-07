@@ -1,72 +1,85 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa6";
-import { toast } from "react-toastify";
-import Button from "../Button";
-import Modal from "./components/Modal";
-import FacilityForm from "./components/FacilityForm";
-import Allfacilities from "./components/Allfacilities";
-import Editfacilities from "./components/Editfacilities";
-import Nofacility from "./components/Nofacility";
+import { useEffect, useRef, useState } from 'react';
+import { FaPlus } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
+import Button from '../Button';
+import Modal from './components/Modal';
+import FacilityForm from './components/FacilityForm';
+import Allfacilities from './components/Allfacilities';
+import Editfacilities from './components/Editfacilities';
+import Nofacility from './components/Nofacility';
 
-import { FacilityData } from "@/app/models";
+import { FacilityData } from '@/app/models';
 
-const STORAGE_KEY = "variis-xv-racecar";
+const STORAGE_KEY = 'variis-xv-racecar';
 
-const emptyFacility: FacilityData = {
-  id: "",
-  name: "",
-  visibility: "Visible",
-  description: "",
+export const emptyFacility: FacilityData = {
+  id: '',
+  name: '',
+  visibility: 'Visible',
+  description: '',
   images: [],
+  availability: {
+    is24Hours: true,
+    startTime: '',
+    endTime: '',
+  },
 };
 
 const Facilities = () => {
   const [showModal, setShowModal] = useState(false);
+
   const [facilityData, setFacilityData] = useState<FacilityData>(emptyFacility);
+
   const [lastSaved, setLastSaved] = useState<string | null>(null);
+
   const [facilities, setFacilities] = useState<FacilityData[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+
   const [selectedFacilityId, setSelectedFacilityId] = useState<string | null>(
     null,
   );
 
-  // Load facilities once
+ 
+  const hasLoadedStorage = useRef(false);
 
-  const updateFacilities = (updatedFacilities: FacilityData[]) => {
-    const formattedTime = new Date().toLocaleString("en-GB", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-
-    setFacilities(updatedFacilities);
-    setLastSaved(formattedTime);
-  };
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const initializeFromStorage = () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
 
-    if (saved) {
-      const parsed = JSON.parse(saved);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
 
-      setFacilities(parsed.facilities ?? []);
-      setLastSaved(parsed.lastSaved ?? null);
+          const savedFacilities = parsed.facilities ?? [];
 
-      if (parsed.facilities?.length > 0) {
-        setSelectedFacilityId(parsed.facilities[0].id);
+          setFacilities(savedFacilities);
+          setLastSaved(parsed.lastSaved ?? null);
+
+          if (savedFacilities.length > 0) {
+            setSelectedFacilityId(savedFacilities[0].id);
+          }
+        } catch {
+          console.error('Failed to load facilities from localStorage.');
+        }
       }
-    }
 
-    setIsLoaded(true);
+      hasLoadedStorage.current = true;
+    };
+
+    const timeoutId = window.setTimeout(initializeFromStorage, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
+
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!hasLoadedStorage.current) {
+      return;
+    }
 
     localStorage.setItem(
       STORAGE_KEY,
@@ -75,13 +88,30 @@ const Facilities = () => {
         lastSaved,
       }),
     );
-  }, [facilities, lastSaved, isLoaded]);
+  }, [facilities, lastSaved]);
 
-  useEffect(() => {
-    if (facilities.length > 0 && !selectedFacilityId) {
-      setSelectedFacilityId(facilities[0].id);
-    }
-  }, [facilities, selectedFacilityId]);
+
+  const effectiveSelectedFacilityId =
+    selectedFacilityId ?? facilities[0]?.id ?? null;
+
+  const selectedFacility =
+    facilities.find(
+      (facility) => facility.id === effectiveSelectedFacilityId,
+    ) ?? null;
+
+  const updateFacilities = (updatedFacilities: FacilityData[]) => {
+    const formattedTime = new Date().toLocaleString('en-GB', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+
+    setFacilities(updatedFacilities);
+    setLastSaved(formattedTime);
+  };
 
   const handleSave = () => {
     const newFacility: FacilityData = {
@@ -91,20 +121,28 @@ const Facilities = () => {
 
     updateFacilities([...facilities, newFacility]);
 
+    /*
+     * Select the newly created facility.
+     */
     setSelectedFacilityId(newFacility.id);
+
+    /*
+     * Reset the form.
+     */
     setFacilityData(emptyFacility);
+
+    /*
+     * Close the modal.
+     */
     setShowModal(false);
 
-    toast.success("Facility created successfully!");
+    toast.success('Facility created successfully!');
   };
 
   const handleCancel = () => {
     setFacilityData(emptyFacility);
     setShowModal(false);
   };
-
-  const selectedFacility =
-    facilities.find((facility) => facility.id === selectedFacilityId) ?? null;
 
   return (
     <>
@@ -137,7 +175,7 @@ const Facilities = () => {
             Draft
           </p>
 
-          <p className="text-gray-600"> Last saved: {lastSaved ?? "Never"}</p>
+          <p className="text-gray-600">Last saved: {lastSaved ?? 'Never'}</p>
         </div>
 
         {/* Content */}
@@ -154,7 +192,7 @@ const Facilities = () => {
               <Allfacilities
                 facilities={facilities}
                 updateFacilities={updateFacilities}
-                selectedFacilityId={selectedFacilityId}
+                selectedFacilityId={effectiveSelectedFacilityId}
                 setSelectedFacilityId={setSelectedFacilityId}
               />
 

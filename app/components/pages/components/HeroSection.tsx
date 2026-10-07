@@ -1,8 +1,8 @@
-import React from "react";
-import { TVData } from "@/app/models";
-import HeroImageUploader from "../../HeroImageUploader";
-import TextFieldWithCounter from "../../TextFieldWithCouner";
-import { guestInfo } from "@/app/constants";
+import React from 'react';
+import { TVData } from '@/app/models';
+import HeroImageUploader from '../../HeroImageUploader';
+import TextFieldWithCounter from '../../TextFieldWithCouner';
+import { guestInfo } from '@/app/constants';
 
 interface HeroSectionProps {
   tvData: TVData;
@@ -27,7 +27,7 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
       </div>
 
       <p className="text-[14px] font-bold">
-        Background Images{" "}
+        Background Images{' '}
         <span className="text-gray-500 font-normal">(Drag to reorder)</span>
       </p>
       <HeroImageUploader
@@ -50,7 +50,7 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
           }))
         }
         multiline
-        maxLength={100}
+        maxLength={50}
       />
       <div className="space-y-3">
         <div>
@@ -73,8 +73,8 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
                 className={`flex items-center gap-2 rounded-lg border px-2 py-3 transition
           ${
             selected
-              ? "border-[#38adec] bg-[#38adec]/10 text-[#38adec]"
-              : "border-gray-300 hover:border-[#38adec]"
+              ? 'border-primary bg-primary/10 text-primary'
+              : 'border-gray-300 hover:border-primary'
           }`}
               >
                 <Icon size={18} />
@@ -83,9 +83,9 @@ const HeroSection = ({ tvData, setTvData }: HeroSectionProps) => {
 
                 <div
                   className={`ml-2 flex text-[12px] h-5 w-5 items-center justify-center rounded-full
-            ${selected ? "bg-[#38adec] text-white" : "border border-gray-300"}`}
+            ${selected ? 'bg-primary text-white' : 'border border-gray-300'}`}
                 >
-                  {selected && "✓"}
+                  {selected && '✓'}
                 </div>
               </button>
             );

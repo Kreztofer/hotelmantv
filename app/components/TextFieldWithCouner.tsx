@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 interface TextFieldWithCounterProps {
   label: string;
   value: string;
+  type?: string;
   required?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   maxLength: number;
@@ -17,6 +18,7 @@ export default function TextFieldWithCounter({
   value,
   onChange,
   maxLength,
+  type="string",
   required = false,
   multiline = false,
   placeholder,
@@ -42,15 +44,16 @@ export default function TextFieldWithCounter({
           maxLength={maxLength}
           rows={3}
           placeholder={placeholder}
-          className="w-full rounded-lg text-[14px] border border-gray-200 p-3 outline-none focus:border-[#38adec]"
+          className="w-full rounded-lg text-[14px] border border-gray-200 p-3 outline-none focus:border-primary"
         />
       ) : (
         <input
           value={value}
+          type={type}
           onChange={onChange}
           maxLength={maxLength}
           placeholder={placeholder}
-          className="h-12 w-full rounded-lg text-[14px] border border-gray-200 px-3 outline-none focus:border-[#38adec]"
+          className="h-12 w-full rounded-lg text-[14px] border border-gray-200 px-3 outline-none focus:border-primary"
         />
       )}
     </div>

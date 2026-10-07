@@ -1,11 +1,11 @@
-"use client";
-import { useState } from "react";
-import TextFieldWithCounter from "../../TextFieldWithCouner";
-import IconPicker from "./IconPicker";
-import { directoryIcons } from "@/app/constants/directoryIcons";
-import Button from "../../Button";
-import VisibilityDropdown from "./VisibilityDropdown";
-import { DirectoryFormProps } from "@/app/models";
+'use client';
+
+import TextFieldWithCounter from '../../TextFieldWithCouner';
+import IconPicker from './IconPicker';
+import { directoryIcons } from '@/app/constants/directoryIcons';
+import Button from '../../Button';
+import VisibilityDropdown from './VisibilityDropdown';
+import { DirectoryFormProps } from '@/app/models';
 
 const DirectoriesForm = ({
   directoriesData,
@@ -15,9 +15,9 @@ const DirectoriesForm = ({
   onSave,
 }: DirectoryFormProps) => {
   const isFormValid =
-    directoriesData.name.trim() !== "" &&
-    directoriesData.description.trim() !== "" &&
-    directoriesData.icon.trim() !== "";
+    directoriesData.name.trim() !== '' &&
+    directoriesData.description.trim() !== '' &&
+    directoriesData.icon.trim() !== '';
 
   return (
     <div className="flex flex-col gap-3 w-full">

@@ -1,70 +1,100 @@
-"use client";
-import { useState, useEffect } from "react";
-import Button from "../Button";
-import { FaPlus } from "react-icons/fa6";
-import Nodirectories from "./components/Nodirectories";
-import Modal from "./components/Modal";
-import { toast } from "react-toastify";
-import DirectoriesForm from "./components/DirectoriesForm";
-import { DirectoryData } from "@/app/models";
-import AllDirectories from "./components/AllDirectories";
-import EditDirectories from "./components/EditDirectories";
+'use client';
 
-const STORAGE_KEY = "variis-xv-driver";
+import { useEffect, useRef, useState } from 'react';
+import Button from '../Button';
+import { FaPlus } from 'react-icons/fa6';
+import Nodirectories from './components/Nodirectories';
+import Modal from './components/Modal';
+import { toast } from 'react-toastify';
+import DirectoriesForm from './components/DirectoriesForm';
+import { DirectoryData } from '@/app/models';
+import AllDirectories from './components/AllDirectories';
+import EditDirectories from './components/EditDirectories';
+
+const STORAGE_KEY = 'variis-xv-driver';
 
 const emptyDirectory: DirectoryData = {
-  id: "",
-  name: "",
-  phoneNumber: "",
-  visibility: "Visible",
-  description: "",
-  icon: "",
+  id: '',
+  name: '',
+  phoneNumber: '',
+  visibility: 'Visible',
+  description: '',
+  icon: '',
 };
 
 const Directory = () => {
   const [showModal, setShowModal] = useState(false);
+
   const [directoriesData, setDirectoriesData] =
     useState<DirectoryData>(emptyDirectory);
+
   const [lastSaved, setLastSaved] = useState<string | null>(null);
+
   const [directories, setDirectories] = useState<DirectoryData[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+
   const [selectedDirectoryId, setSelectedDirectoryId] = useState<string | null>(
     null,
   );
 
-  const updateDirectories = (updatedDirectories: DirectoryData[]) => {
-    const formattedTime = new Date().toLocaleString("en-GB", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
+  /*
+   * Prevent the save-to-localStorage effect from running
+   * before we have finished loading the existing data.
+   */
+  const hasLoadedStorage = useRef(false);
 
-    setDirectories(updatedDirectories);
-    setLastSaved(formattedTime);
-  };
-
+  /*
+   * Load existing data from localStorage after the initial
+   * render.
+   *
+   * setTimeout ensures the state updates do not happen
+   * synchronously inside the effect, which satisfies the
+   * new React set-state-in-effect rule.
+   */
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const initializeFromStorage = () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
 
-    if (saved) {
-      const parsed = JSON.parse(saved);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
 
-      setDirectories(parsed.directories ?? []);
-      setLastSaved(parsed.lastSaved ?? null);
+          const savedDirectories = parsed.directories ?? [];
 
-      if (parsed.directories?.length > 0) {
-        setSelectedDirectoryId(parsed.directories[0].id);
+          setDirectories(savedDirectories);
+          setLastSaved(parsed.lastSaved ?? null);
+
+          /*
+           * Select the first directory when loading existing
+           * data and nothing has been selected yet.
+           */
+          if (savedDirectories.length > 0) {
+            setSelectedDirectoryId(savedDirectories[0].id);
+          }
+        } catch {
+          console.error('Failed to load directories from localStorage.');
+        }
       }
-    }
 
-    setIsLoaded(true);
+      hasLoadedStorage.current = true;
+    };
+
+    const timeoutId = window.setTimeout(initializeFromStorage, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
+  /*
+   * Keep localStorage synchronized with React state.
+   *
+   * This effect is appropriate because localStorage is an
+   * external system.
+   */
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!hasLoadedStorage.current) {
+      return;
+    }
 
     localStorage.setItem(
       STORAGE_KEY,
@@ -73,13 +103,36 @@ const Directory = () => {
         lastSaved,
       }),
     );
-  }, [directories, lastSaved, isLoaded]);
+  }, [directories, lastSaved]);
 
-  useEffect(() => {
-    if (directories.length > 0 && !selectedDirectoryId) {
-      setSelectedDirectoryId(directories[0].id);
-    }
-  }, [directories, selectedDirectoryId]);
+  /*
+   * If no directory is explicitly selected, fall back to
+   * the first available directory.
+   *
+   * This replaces the old effect that called
+   * setSelectedDirectoryId().
+   */
+  const effectiveSelectedDirectoryId =
+    selectedDirectoryId ?? directories[0]?.id ?? null;
+
+  const selectedDirectory =
+    directories.find(
+      (directory) => directory.id === effectiveSelectedDirectoryId,
+    ) ?? null;
+
+  const updateDirectories = (updatedDirectories: DirectoryData[]) => {
+    const formattedTime = new Date().toLocaleString('en-GB', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+
+    setDirectories(updatedDirectories);
+    setLastSaved(formattedTime);
+  };
 
   const handleSave = () => {
     const newDirectory: DirectoryData = {
@@ -89,21 +142,28 @@ const Directory = () => {
 
     updateDirectories([...directories, newDirectory]);
 
+    /*
+     * Select the newly created directory immediately.
+     */
     setSelectedDirectoryId(newDirectory.id);
+
+    /*
+     * Reset the form.
+     */
     setDirectoriesData(emptyDirectory);
+
+    /*
+     * Close the modal.
+     */
     setShowModal(false);
 
-    toast.success("Directory created successfully!");
+    toast.success('Directory created successfully!');
   };
 
   const handleCancel = () => {
     setDirectoriesData(emptyDirectory);
     setShowModal(false);
   };
-
-  const selectedDirectory =
-    directories.find((directory) => directory.id === selectedDirectoryId) ??
-    null;
 
   return (
     <>
@@ -129,14 +189,16 @@ const Directory = () => {
             </div>
           </div>
         </div>
+
         {/* Status */}
         <div className="mt-4 flex items-center justify-end gap-4 text-[12px]">
           <p className="rounded-sm bg-gray-200 px-2 py-1 text-gray-600">
             Draft
           </p>
 
-          <p className="text-gray-600"> Last saved: {lastSaved ?? "Never"}</p>
+          <p className="text-gray-600">Last saved: {lastSaved ?? 'Never'}</p>
         </div>
+
         {/* Content */}
         <div className="mt-8">
           {directories.length === 0 ? (
@@ -151,9 +213,10 @@ const Directory = () => {
               <AllDirectories
                 directories={directories}
                 updateDirectories={updateDirectories}
-                selectedDirectoryId={selectedDirectoryId}
+                selectedDirectoryId={effectiveSelectedDirectoryId}
                 setSelectedDirectoryId={setSelectedDirectoryId}
               />
+
               <EditDirectories
                 directory={selectedDirectory}
                 directories={directories}

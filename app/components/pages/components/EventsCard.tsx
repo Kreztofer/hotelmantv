@@ -1,21 +1,19 @@
-'use client';
-
-import { FacilityData } from '@/app/models';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { FaGripVertical } from 'react-icons/fa6';
 import { truncate } from './DirectoryCard';
+import { EventsData } from '@/app/models';
 
-interface FacilityCardProps {
-  facility: FacilityData;
+interface EventCardProps {
+  event: EventsData;
   selected: boolean;
   onClick: () => void;
 }
 
-const FacilityCard = ({ facility, selected, onClick }: FacilityCardProps) => {
+const EventsCard = ({ event, selected, onClick }: EventCardProps) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
-      id: facility.id,
+      id: event.id,
     });
 
   const style = {
@@ -23,7 +21,7 @@ const FacilityCard = ({ facility, selected, onClick }: FacilityCardProps) => {
     transition,
   };
 
-  const image = facility.images.length > 0 ? facility.images[0].preview : '';
+  const image = event.images.length > 0 ? event.images[0].preview : '';
 
   return (
     <div
@@ -51,7 +49,7 @@ const FacilityCard = ({ facility, selected, onClick }: FacilityCardProps) => {
         {image ? (
           <img
             src={image}
-            alt={facility.name}
+            alt={event.name}
             className="h-full w-full object-cover"
             onLoad={() => console.log('loaded', image)}
             onError={() => console.log('failed', image)}
@@ -67,15 +65,15 @@ const FacilityCard = ({ facility, selected, onClick }: FacilityCardProps) => {
       <div className="w-full justify-between flex">
         <div className="W-[80%]">
           <h3 className="truncate text-[14px] font-semibold text-gray-900">
-            {facility.name}
+            {event.name}
           </h3>
           <p className="text-[12px] text-gray-500">
-            {truncate(facility.description, 20)}
+            {truncate(event.description, 20)}
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          {facility.visibility === 'Visible' ? (
+          {event.visibility === 'Visible' ? (
             <>
               <span className="text-xs font-medium bg-green-100 py-1 px-2 rounded-xs text-green-600">
                 Visible
@@ -94,4 +92,4 @@ const FacilityCard = ({ facility, selected, onClick }: FacilityCardProps) => {
   );
 };
 
-export default FacilityCard;
+export default EventsCard;

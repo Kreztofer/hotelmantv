@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
 
 import {
   SortableContext,
   verticalListSortingStrategy,
   arrayMove,
-} from "@dnd-kit/sortable";
+} from '@dnd-kit/sortable';
 
-import { DirectoryData } from "@/app/models";
-import DirectoryCard from "./DirectoryCard";
+import { DirectoryData } from '@/app/models';
+import DirectoryCard from './DirectoryCard';
 
 interface Props {
   directories: DirectoryData[];

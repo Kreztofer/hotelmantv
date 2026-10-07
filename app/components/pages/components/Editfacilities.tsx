@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import FacilityForm from "./FacilityForm";
-import { FacilityData } from "@/app/models";
-import ConfirmationModal from "./ConfirmationModal";
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import FacilityForm from './FacilityForm';
+import { FacilityData } from '@/app/models';
+import ConfirmationModal from './ConfirmationModal';
 
 interface EditFacilitiesProps {
   facility: FacilityData | null;
@@ -17,7 +17,6 @@ const Editfacilities = ({
   facilities,
   updateFacilities,
 }: EditFacilitiesProps) => {
-  // Show empty state if nothing is selected
   if (!facility) {
     return (
       <div className="flex flex-1 items-center justify-center rounded-xl border border-gray-200 bg-white">
@@ -26,12 +25,30 @@ const Editfacilities = ({
     );
   }
 
-  const [facilityData, setFacilityData] = useState<FacilityData>(facility);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  return (
+    <FacilityEditor
+      key={facility.id}
+      facility={facility}
+      facilities={facilities}
+      updateFacilities={updateFacilities}
+    />
+  );
+};
 
-  useEffect(() => {
-    setFacilityData(facility);
-  }, [facility]);
+interface FacilityEditorProps {
+  facility: FacilityData;
+  facilities: FacilityData[];
+  updateFacilities: (facilities: FacilityData[]) => void;
+}
+
+const FacilityEditor = ({
+  facility,
+  facilities,
+  updateFacilities,
+}: FacilityEditorProps) => {
+  const [facilityData, setFacilityData] = useState<FacilityData>(facility);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleSave = () => {
     const updatedFacilities = facilities.map((item) =>
@@ -40,7 +57,7 @@ const Editfacilities = ({
 
     updateFacilities(updatedFacilities);
 
-    toast.success("Facility updated successfully!");
+    toast.success('Facility updated successfully!');
   };
 
   const handleCancel = () => {
@@ -56,11 +73,11 @@ const Editfacilities = ({
 
     setShowDeleteModal(false);
 
-    toast.success("Facility deleted successfully!");
+    toast.success('Facility deleted successfully!');
   };
 
   return (
-    <div className="flex-1  shadow-sm rounded-xl border border-gray-200 bg-white p-6">
+    <div className="flex-1 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold">Edit Facility</h2>
@@ -76,6 +93,7 @@ const Editfacilities = ({
         onDelete={() => setShowDeleteModal(true)}
         onCancel={handleCancel}
       />
+
       <ConfirmationModal
         isOpen={showDeleteModal}
         title="Delete Facility"

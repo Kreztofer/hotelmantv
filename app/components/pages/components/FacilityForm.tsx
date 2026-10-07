@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import TextFieldWithCounter from "../../TextFieldWithCouner";
-import VisibilityDropdown from "./VisibilityDropdown";
-import HeroImageUploader from "../../HeroImageUploader";
-import { FacilityFormProps } from "@/app/models";
-import Button from "../../Button";
+import TextFieldWithCounter from '../../TextFieldWithCouner';
+import VisibilityDropdown from './VisibilityDropdown';
+import HeroImageUploader from '../../HeroImageUploader';
+import { FacilityFormProps } from '@/app/models';
+import Button from '../../Button';
+import AvailabilitySelector from './AvailabilitySelector';
 
 const FacilityForm = ({
   facilityData,
@@ -14,9 +15,12 @@ const FacilityForm = ({
   onCancel,
 }: FacilityFormProps) => {
   const isFormValid =
-    facilityData.name.trim() !== "" &&
-    facilityData.description.trim() !== "" &&
-    facilityData.images.length > 0;
+    facilityData.name.trim() !== '' &&
+    facilityData.description.trim() !== '' &&
+    facilityData.images.length > 0 &&
+    (facilityData.availability.is24Hours ||
+      (facilityData.availability.startTime !== '' &&
+        facilityData.availability.endTime !== ''));
   return (
     <div className="flex flex-col gap-3 w-full">
       <p className="text-[16px] font-bold">Facility Information</p>
@@ -45,6 +49,15 @@ const FacilityForm = ({
           }
         />
       </div>
+      <AvailabilitySelector
+        value={facilityData.availability}
+        onChange={(availability) =>
+          setFacilityData((prev) => ({
+            ...prev,
+            availability,
+          }))
+        }
+      />
       <TextFieldWithCounter
         label="Facility Description"
         value={facilityData.description}

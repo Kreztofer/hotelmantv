@@ -1,19 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
-  BedSingle,
   CalendarDays,
   Utensils,
   Building2,
   Phone,
   MessageSquare,
-} from "lucide-react";
-import { BsDoorOpenFill } from "react-icons/bs";
+} from 'lucide-react';
+import { BsDoorOpenFill } from 'react-icons/bs';
 
-import { TVData } from "@/app/models";
-import Image from "next/image";
-import { images } from "@/app/constants";
+import { TVData } from '@/app/models';
+import Image from 'next/image';
+import { images } from '@/app/constants';
 
 interface TVPreviewProps {
   tvData: TVData;
@@ -21,8 +20,8 @@ interface TVPreviewProps {
 }
 
 export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
+  const [time, setTime] = useState('');
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -30,19 +29,19 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
 
       setTime(
         now
-          .toLocaleTimeString("en-GB", {
-            hour: "numeric",
-            minute: "2-digit",
+          .toLocaleTimeString('en-GB', {
+            hour: 'numeric',
+            minute: '2-digit',
             hour12: true,
           })
-          .replace(":", "."),
+          .replace(':', '.'),
       );
 
       setDate(
-        now.toLocaleDateString("en-GB", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
+        now.toLocaleDateString('en-GB', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
         }),
       );
     };
@@ -90,16 +89,18 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
 
   return (
     <div className="mt-8 flex justify-center">
-      <div className="relative w-full max-w-[760px]">
+      <div className="relative w-full max-w-190">
         {/* TV */}
         <div className=" bg-black p-3 shadow-[0_30px_70px_rgba(0,0,0,.45)]">
           {/* Screen */}
-          <div className="relative h-[340px] overflow-hidden  bg-black">
+          <div className="relative h-85 overflow-hidden  bg-black">
             {/* Background */}
-            <img
+            <Image
               src={background}
               alt="TV Background"
-              className="absolute inset-0 h-full w-full object-cover transition-all duration-500"
+              fill
+              className="object-cover transition-all duration-500"
+              priority
             />
 
             {/* Overlay */}
@@ -113,7 +114,7 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
                 <div className="flex items-center justify-end gap-2 text-[12px] ">
                   <span>{date}</span>
                 </div>
-                <div className="h-[0.4px] w-10px bg-[#38adec]" />
+                <div className="h-[0.4px] w-10px bg-primary" />
                 <p className="text-[12px] font-semibold">{time}</p>
               </div>
             </div>
@@ -131,32 +132,32 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
                 alt="divider"
               />
               <div className="max-w-2xl mt-2 text-center">
-                {tvData.guestInfo.includes("guest") && (
+                {tvData.guestInfo.includes('guest') && (
                   <p className=" text-white text-[15px] ">Welcome, Maria!</p>
                 )}
               </div>
               <div className="max-w-2xl text-center">
                 {tvData.message && (
-                  <p className="break-words whitespace-pre-wrap text-[12px] leading-6 text-white/80">
+                  <p className="wrap-break-word whitespace-pre-wrap text-[12px] leading-6 text-white/80">
                     {tvData.message}
                   </p>
                 )}
               </div>
 
               <div className="flex flex-wrap mt-1 justify-center gap-2">
-                {tvData.guestInfo.includes("room") && (
+                {tvData.guestInfo.includes('room') && (
                   <GuestChip
                     icon={<BsDoorOpenFill size={16} />}
                     label="Room 512"
                   />
                 )}
 
-                {tvData.guestInfo.includes("room") &&
-                  tvData.guestInfo.includes("stay") && (
-                    <div className="h-[32px] w-[2px] rounded-full bg-white/60" />
+                {tvData.guestInfo.includes('room') &&
+                  tvData.guestInfo.includes('stay') && (
+                    <div className="h-8 w-0.5 rounded-full bg-white/60" />
                   )}
 
-                {tvData.guestInfo.includes("stay") && (
+                {tvData.guestInfo.includes('stay') && (
                   <GuestChip
                     icon={<CalendarDays size={16} />}
                     label="3 Nights"
@@ -189,8 +190,8 @@ export default function TVPreview({ tvData, setTvData }: TVPreviewProps) {
                     }
                     className={`h-2 w-2 rounded-full transition-all ${
                       index === tvData.currentImage
-                        ? " bg-white"
-                        : "bg-white/40"
+                        ? ' bg-white'
+                        : 'bg-white/40'
                     }`}
                   />
                 ))}
@@ -230,7 +231,7 @@ interface MenuCardProps {
 
 function MenuCard({ title, icon }: MenuCardProps) {
   return (
-    <div className="flex h-24  flex-col items-center justify-center rounded-xl border border-white/20 bg-black/20 backdrop-blur-md transition-all duration-300 hover:border-[#38adec]">
+    <div className="flex h-24  flex-col items-center justify-center rounded-xl border border-white/20 bg-black/20 backdrop-blur-md transition-all duration-300 hover:border-primary">
       <div className="text-white/80">{icon}</div>
 
       <p className="mt-3 text-[12px] font-medium text-white/80">{title}</p>

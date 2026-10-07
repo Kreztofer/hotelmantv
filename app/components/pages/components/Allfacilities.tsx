@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { DndContext, closestCenter, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
 
 import {
   SortableContext,
   verticalListSortingStrategy,
   arrayMove,
-} from "@dnd-kit/sortable";
+} from '@dnd-kit/sortable';
 
-import { FacilityData } from "@/app/models";
-import FacilityCard from "./FacilityCard";
+import { FacilityData } from '@/app/models';
+import FacilityCard from './FacilityCard';
 
 interface Props {
   facilities: FacilityData[];

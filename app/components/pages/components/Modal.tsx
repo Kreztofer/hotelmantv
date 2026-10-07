@@ -1,5 +1,5 @@
-import React from "react";
-import { MdCancel } from "react-icons/md";
+import React from 'react';
+import { MdCancel } from 'react-icons/md';
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export default function Modal({
           </div>
 
           <button className="cursor-pointer" onClick={onClose}>
-            <MdCancel className="text-[#38adec]" size={24} />
+            <MdCancel className="text-primary" size={24} />
           </button>
         </div>
 

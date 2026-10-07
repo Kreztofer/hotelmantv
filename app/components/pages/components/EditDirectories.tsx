@@ -1,9 +1,10 @@
-"use client";
-import { DirectoryData } from "@/app/models";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import DirectoriesForm from "./DirectoriesForm";
-import ConfirmationModal from "./ConfirmationModal";
+'use client';
+
+import { DirectoryData } from '@/app/models';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import DirectoriesForm from './DirectoriesForm';
+import ConfirmationModal from './ConfirmationModal';
 
 interface EditDirectoriesProps {
   directory: DirectoryData | null;
@@ -25,12 +26,30 @@ const EditDirectories = ({
     );
   }
 
-  const [directoryData, setDirectoryData] = useState<DirectoryData>(directory);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  return (
+    <DirectoryEditor
+      key={directory.id}
+      directory={directory}
+      directories={directories}
+      updateDirectories={updateDirectories}
+    />
+  );
+};
 
-  useEffect(() => {
-    setDirectoryData(directory);
-  }, [directory]);
+interface DirectoryEditorProps {
+  directory: DirectoryData;
+  directories: DirectoryData[];
+  updateDirectories: (directories: DirectoryData[]) => void;
+}
+
+const DirectoryEditor = ({
+  directory,
+  directories,
+  updateDirectories,
+}: DirectoryEditorProps) => {
+  const [directoryData, setDirectoryData] = useState<DirectoryData>(directory);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleSave = () => {
     const updatedDirectories = directories.map((item) =>
@@ -39,7 +58,7 @@ const EditDirectories = ({
 
     updateDirectories(updatedDirectories);
 
-    toast.success("Directory updated successfully!");
+    toast.success('Directory updated successfully!');
   };
 
   const handleCancel = () => {
@@ -55,11 +74,11 @@ const EditDirectories = ({
 
     setShowDeleteModal(false);
 
-    toast.success("Directory deleted successfully!");
+    toast.success('Directory deleted successfully!');
   };
 
   return (
-    <div className="flex-1  shadow-sm rounded-xl border border-gray-200 bg-white p-6">
+    <div className="flex-1 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold">Edit Directory</h2>
@@ -69,6 +88,7 @@ const EditDirectories = ({
           </p>
         </div>
       </div>
+
       <DirectoriesForm
         directoriesData={directoryData}
         setDirectoriesData={setDirectoryData}
@@ -76,6 +96,7 @@ const EditDirectories = ({
         onDelete={() => setShowDeleteModal(true)}
         onCancel={handleCancel}
       />
+
       <ConfirmationModal
         isOpen={showDeleteModal}
         title="Delete Directory"
