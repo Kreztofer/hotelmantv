@@ -53,6 +53,7 @@ const DirectoriesForm = ({
         <TextFieldWithCounter
           label="Phone Number"
           required
+          type='number'
           placeholder="Enter number"
           maxLength={50}
           value={directoriesData.phoneNumber}

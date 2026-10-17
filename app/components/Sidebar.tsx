@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { images } from "@/app/constants";
-import Image from "next/image";
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { sidebarLinks } from "@/app/constants";
-import ConfirmationModal from "./pages/components/ConfirmationModal";
+import { images } from '@/app/constants';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { sidebarLinks } from '@/app/constants';
+import ConfirmationModal from './pages/components/ConfirmationModal';
 
 const Sidebar = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentStep = searchParams.get("v1") || "dashboard";
+  const currentStep = searchParams.get('v1') || 'dashboard';
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const router = useRouter();
@@ -19,7 +19,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     setShowLogoutModal(false);
 
-    router.push("/signin");
+    router.push('/signin');
   };
   return (
     <>
@@ -45,14 +45,14 @@ const Sidebar = () => {
                   onClick={() => {
                     if (item.disabled) return;
 
-                    if (item.name.toLowerCase() === "logout") {
+                    if (item.name.toLowerCase() === 'logout') {
                       setShowLogoutModal(true);
                       return;
                     }
 
                     const params = new URLSearchParams(searchParams.toString());
 
-                    params.set("v1", item.name.toLowerCase());
+                    params.set('v1', item.name.toLowerCase());
 
                     router.push(`/dashboard?${params.toString()}`);
                   }}
@@ -62,23 +62,23 @@ const Sidebar = () => {
           group relative flex items-center gap-6 p-2 rounded-md transition-all
           ${
             item.disabled
-              ? "cursor-not-allowed opacity-50 blur-[1px] pointer-events-none"
-              : "cursor-pointer"
+              ? 'cursor-not-allowed opacity-50 blur-[1px] pointer-events-none'
+              : 'cursor-pointer'
           }
           ${
             isActive
-              ? "bg-gradient-to-r from-[#2488bd] to-[#1f2143]"
-              : "hover:bg-[#0e1220] text-[#81899C]"
+              ? 'bg-gradient-to-r from-[#2488bd] to-[#1f2143]'
+              : 'hover:bg-[#0e1220] text-[#81899C]'
           }
         `}
                   >
                     <Icon
                       size={18}
-                      className={isActive ? "text-white" : "text-[#81899C]"}
+                      className={isActive ? 'text-white' : 'text-[#81899C]'}
                     />
 
                     <span
-                      className={isActive ? "text-white" : "text-[#81899C]"}
+                      className={isActive ? 'text-white' : 'text-[#81899C]'}
                     >
                       {item.name}
                     </span>
@@ -91,12 +91,19 @@ const Sidebar = () => {
                   </div>
 
                   {index === 5 && (
-                    <div className="my-15 border-t border-[#161923]" />
+                    <div className="my-13 border-t border-[#161923]" />
                   )}
                 </div>
               );
             })}
           </nav>
+
+          <div className="text-white mt-17 flex items-center gap-6">
+            <div className="border-primary rounded-full border-2 w-9 h-9 flex items-center justify-center">
+              M
+            </div>
+            <p>My hotel</p>
+          </div>
         </div>
       </aside>
       <ConfirmationModal
